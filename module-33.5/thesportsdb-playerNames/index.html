@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sportsBD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1 class="text-center">SPORTS DB</h1>
+    <h3 class="text-center">Search with Last name or Full name</h3>
+    <p class="text-center">Search: Chris Bosh | Search: Bosh</p>
+    <!-- search input -->
+    <div class="input-group mb-3 w-50 mx-auto mt-5">
+        <input id="searchInput" type="text" class="form-control" placeholder="please give players name"
+            aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <span onclick="inputValue()" class="input-group-text" id="basic-addon2">Search</span>
+    </div>
+    <!-- search input end -->
+    <!-- Dual Name CARD [ single player ]-->
+    <div id="playerCard" class=" mx-auto m-5" style="width: 25rem;">
+
+    </div>
+    <!-- Dual Name CARD end -->
+    <!-- Single name search [ multiple player ] -->
+    <div class="container">
+        <div id="multiplepPlayer" class="row row-cols-1 row-cols-md-3 g-4">
+
+        </div>
+    </div>
+    <!-- Single name search [ multiple player ] END -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>

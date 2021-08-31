@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <style>
+        #comments {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="text-center">welcome to comments</h1>
+    <div id="singleComment"></div>
+    <div class="mx-auto">
+        <button id='loadData' class="btn btn-primary">Load Comments</button>
+    </div>
+    <div id="spinner" class="d-flex justify-content-center d-none">
+        <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div id="comments"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('loadData').addEventListener('click', () => {
+            //add spinner by removing class
+            document.getElementById('spinner').classList.remove('d-none');
+            let firstUrl = `https://jsonplaceholder.typicode.com/comments`;
+            fetch(firstUrl)
+                .then(res => res.json())
+                .then(data => gotData(data))
+
+            let gotData = data => {
+                //remove spinner by adding class
+                document.getElementById('spinner').classList.add('d-none');
+                let parentDiv = document.getElementById('comments')
+                data.forEach(el => {
+                    let { id, name, email, body } = el;
+                    // console.log(id, name, email, body)
+                    let childDiv = document.createElement('div');
+                    childDiv.style.border = '2px solid red';
+                    childDiv.style.margin = '10px';
+                    childDiv.style.padding = '20px';
+                    childDiv.style.width = '400px';
+
+                    childDiv.innerHTML = `
+                            <h2>Name: ${name}</h2>
+                            <button class='btn btn-danger' onclick="singleCard(${id})" >Show Details</button>
+
+                    `;
+                    parentDiv.appendChild(childDiv)
+                })// forEach End
+            } //gotData func end
+        })//btn event handler end
+
+
+
+        /* NOTE: on click a je data pathabo, always oita eventHandler er baire likhte hobe */
+        let singleCard = id => {
+            let secondURL = `https://jsonplaceholder.typicode.com/comments/${id}`;
+            fetch(secondURL)
+                .then(res => res.json())
+                .then(data => gotData(data))
+            let parentDiv = document.getElementById('singleComment');
+            parentDiv.textContent = ""
+            let gotData = data => {
+                let { id, name, email, body } = data;
+
+                let childDiv = document.createElement('div');
+                childDiv.style.border = '5px solid dodgerblue';
+                childDiv.style.margin = '10px';
+                childDiv.style.padding = '20px';
+
+
+                childDiv.innerHTML = `
+                            <h2>${name}</h2>
+                            <h1>${id}</h1>
+                            <h3>${email}</h3>
+                            <p>${body}</p>
+                            
+                    `;
+                parentDiv.appendChild(childDiv)
+
+
+            }
+        }
+    </script>
+</body>
+
+</html>
